@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="seoTitle">Atelier S.L — Style kabyle, Luxe et tradition</title>
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png">
+
+<!-- ══════════════════════════════════════════════════════════
+     SEO — valeurs par défaut (page d'accueil).
+     Chaque page/produit les remplace via setMeta()/setJsonLd()
+     côté client, et le serveur de pré-rendu (ssr-server/) les
+     remplace côté serveur avant envoi au navigateur/crawler.
+══════════════════════════════════════════════════════════ -->
+<meta id="seoDescription" name="description" content="Atelier S.L — confection kabyle sur commande : robes de cérémonie, caftans, burnous et accessoires traditionnels brodés main. Livraison en Algérie.">
+<link id="seoCanonical" rel="canonical" href="https://example.com/">
+
+<meta id="ogType"  property="og:type"  content="website">
+<meta id="ogTitle" property="og:title" content="Atelier S.L — Style kabyle, Luxe et tradition">
+<meta id="ogDesc"  property="og:description" content="Confection kabyle sur commande : robes de cérémonie, caftans, burnous et accessoires traditionnels brodés main.">
+<meta id="ogImage" property="og:image" content="https://example.com/og-default.jpg">
+<meta id="ogUrl"   property="og:url"   content="https://example.com/">
+<meta property="og:site_name" content="Atelier S.L">
+<meta property="og:locale" content="fr_DZ">
+
+<meta id="twCard"  name="twitter:card" content="summary_large_image">
+<meta id="twTitle" name="twitter:title" content="Atelier S.L — Style kabyle, Luxe et tradition">
+<meta id="twDesc"  name="twitter:description" content="Confection kabyle sur commande : robes de cérémonie, caftans, burnous et accessoires traditionnels brodés main.">
+<meta id="twImage" name="twitter:image" content="https://example.com/og-default.jpg">
+
+<script type="application/ld+json" id="ldOrganization">
+{
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "name": "Atelier S.L",
+  "url": "https://example.com/",
+  "description": "Confection kabyle sur commande : robes de cérémonie, caftans, burnous et accessoires traditionnels brodés main.",
+  "areaServed": "DZ",
+  "priceRange": "$$"
+}
+</script>
+<!-- JSON-LD spécifique à la page courante (Product, BreadcrumbList, ItemList…),
+     injecté/retiré dynamiquement par setJsonLd() -->
+<script type="application/ld+json" id="ldPage"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/css/main.css">
+<link id="heroPreload" rel="preload" as="image" fetchpriority="high" imagesrcset="" imagesizes="" href="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png">
+
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="go('accueil')" id="navLogo">
+      <img src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Atelier S.L" class="nav-logo-img">
+      <span class="nav-logo-text">Atelier S.L</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link active" href="/" data-page="accueil" data-i18n="nav.accueil" onclick="event.preventDefault();go('accueil')">Accueil</a>
+      <a class="nav-link" href="/catalogue" data-page="catalogue" data-i18n="nav.catalogue" onclick="event.preventDefault();go('catalogue')">Catalogue</a>
+      <a class="nav-link" href="/a-propos" data-page="apropos" data-i18n="nav.apropos" onclick="event.preventDefault();go('apropos')">À propos</a>
+      <a class="nav-link" href="/contact" data-page="contact" data-i18n="nav.contact" onclick="event.preventDefault();go('contact')">Contact</a>
+    </div>
+    <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <form class="nav-search-form" onsubmit="searchFromNavbar(event)" role="search" aria-label="Rechercher dans le catalogue">
+      <span class="nav-search-icon" aria-hidden="true">⌕</span>
+      <input id="navSearch" class="nav-search-input" type="search" placeholder="Rechercher une robe, un caftan…" data-i18n-placeholder="search.placeholder" autocomplete="off" oninput="onNavbarSearchInput(this.value)">
+      <button class="nav-search-submit" type="submit" aria-label="Rechercher" title="Rechercher">→</button>
+    </form>
+    <div class="nav-actions">
+      <div class="lang-switch" id="deviseSwitch" role="group" aria-label="Devise / Pays">
+        <button class="lang-btn active" data-devise="DZD" onclick="setDevise('DZD')" title="Algérie — Dinar (DA)">🇩🇿 DA</button>
+        <button class="lang-btn" data-devise="EUR" onclick="setDevise('EUR')" title="France — Euro (€)">🇫🇷 €</button>
+      </div>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Langue / اللغة / Tutlayt">
+        <button class="lang-btn active" data-lang="fr" onclick="setLanguage('fr')" title="Français">FR</button>
+        <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')" title="العربية">AR</button>
+        <button class="lang-btn" data-lang="kab" onclick="setLanguage('kab')" title="Taqbaylit (Tamazight)">ⵣ</button>
+      </div>
+      <button class="nav-icon-btn" onclick="toggleTheme()" id="btnTheme" title="Mode sombre" data-i18n-title="nav.darkMode">🌙</button>
+      <button class="nav-icon-btn" onclick="goAccount()" title="Mon compte" data-i18n-title="nav.account">👤</button>
+      <button class="nav-icon-btn cart-btn" onclick="go('panier')" title="Panier" data-i18n-title="nav.cart">
+        🛒<span class="cart-badge hidden" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu-drawer" id="mobileMenuDrawer">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title">Menu</span>
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Fermer le menu">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a class="mobile-menu-link" href="/" data-page="accueil" data-i18n="nav.accueil" onclick="event.preventDefault();go('accueil');closeMobileMenu()">Accueil</a>
+    <a class="mobile-menu-link" href="/catalogue" data-page="catalogue" data-i18n="nav.catalogue" onclick="event.preventDefault();go('catalogue');closeMobileMenu()">Catalogue</a>
+    <a class="mobile-menu-link" href="/a-propos" data-page="apropos" data-i18n="nav.apropos" onclick="event.preventDefault();go('apropos');closeMobileMenu()">À propos</a>
+    <a class="mobile-menu-link" href="/contact" data-page="contact" data-i18n="nav.contact" onclick="event.preventDefault();go('contact');closeMobileMenu()">Contact</a>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTENT ═══════════════ -->
+<main class="page-content" id="mainContent">
+
+<!-- ACCUEIL -->
+<div id="page-accueil" class="page active">
+  <div class="hero">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <div class="hero-kicker">Collection Atelier S.L</div>
+        <h1 class="hero-title" data-i18n-html="hero.title">Bienvenue chez <em>Atelier S.L</em></h1>
+        <p class="hero-sub" data-i18n="hero.sub">Là où la nouveauté rencontre la tradition</p>
+        <p class="hero-desc" data-i18n="hero.desc">Nous sommes ravis de vous accueillir dans notre univers, où vous découvrirez tout ce qu'il vous faut pour illuminer vos fêtes et vos événements, avec des prix parmi les plus doux du marché.</p>
+        <div class="hero-btns">
+          <button class="btn-hero-primary" onclick="go('catalogue')" data-i18n="hero.cta1">Découvrir la collection</button>
+          <button class="btn-hero-outline" onclick="go('apropos')" data-i18n="hero.cta2">Notre histoire →</button>
+        </div>
+        <div class="hero-perks" aria-label="Engagements Atelier S.L">
+          <div class="hero-perk"><span class="hero-perk-icon">✦</span><span>Pièces sélectionnées</span></div>
+          <div class="hero-perk"><span class="hero-perk-icon">◇</span><span>Confection soignée</span></div>
+          <div class="hero-perk"><span class="hero-perk-icon">✓</span><span>Qualité premium</span></div>
+        </div>
+      </div>
+      <div class="hero-media" aria-label="Création Atelier S.L mise en avant">
+        <div class="hero-photo-frame">
+          <img id="heroProductImage" class="" srcset="" sizes="" src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Atelier S.L" fetchpriority="high" width="700" height="500" onerror="this.classList.remove('has-product');this.src='https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png'">
+        </div>
+        <div class="hero-seal" aria-label="Logo Atelier S.L"><img src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Logo Atelier S.L"></div>
+        <div class="hero-note"><strong>Créations sur mesure</strong><span>Pour vos fêtes et vos plus beaux événements</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-benefits section-inner" aria-label="Services de la boutique">
+    <div class="benefit-item"><span class="benefit-icon">▣</span><div><strong>Livraison disponible</strong><span>Partout en Algérie</span></div></div>
+    <div class="benefit-item"><span class="benefit-icon">↶</span><div><strong>Retours simplifiés</strong><span>Accompagnement client</span></div></div>
+    <div class="benefit-item"><span class="benefit-icon">▤</span><div><strong>Paiement sécurisé</strong><span>Commande protégée</span></div></div>
+    <div class="benefit-item"><span class="benefit-icon">◌</span><div><strong>Service client</strong><span>Une équipe à votre écoute</span></div></div>
+  </div>
+
+  <!-- Featured products -->
+  <div class="section" style="background:var(--bg)">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label" data-i18n="home.featured.label">Sélection exclusive</div>
+        <h2 class="section-title" data-i18n="home.featured.title">Nos créations phares</h2>
+        <div class="ornament-center" id="ornSection1"></div>
+        <p class="section-sub" data-i18n="home.featured.sub">Des pièces d'exception choisies pour leur beauté et leur authenticité</p>
+      </div>
+      <div class="products-grid" id="featured-grid"></div>
+      <div style="text-align:center;margin-top:36px">
+        <button class="btn-gold" onclick="go('catalogue')" data-i18n="home.featured.cta">Voir toute la collection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section" style="background:var(--bg2);padding:60px 0">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label" data-i18n="home.categories.label">Univers</div>
+        <h2 class="section-title" data-i18n="home.categories.title">Explorer par catégorie</h2>
+      </div>
+      <div class="cats-grid" id="catTiles">
+        <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:20px">Chargement…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand story strip -->
+  <div class="story-strip">
+    <div class="story-strip-bg" id="storyBg"></div>
+    <div class="story-inner">
+      <div class="story-text">
+        <div class="tag" data-i18n="home.story.tag">Notre ADN</div>
+        <h2 data-i18n="home.story.title">L'authenticité kabyle au cœur de chaque fil</h2>
+        <p data-i18n="home.story.p1">Fondée au cœur de la Kabylie, Atelier S.L est née d'une passion pour les arts textiles amazighs. Nos artisanes perpétuent des techniques de broderie vieilles de plusieurs siècles.</p>
+        <p data-i18n="home.story.p2">Chaque création est une œuvre unique, pensée pour allier héritage culturel et élégance contemporaine.</p>
+        <button class="btn-hero-outline" onclick="go('apropos')" style="margin-top:16px" data-i18n="home.story.cta">Découvrir notre histoire →</button>
+      </div>
+      <div class="story-visual">
+        <div class="story-tile" style="grid-column:1/-1;height:100px">
+          <div class="story-tile-val">+500</div>
+          <div class="story-tile-label" data-i18n="home.story.stat1">Clientes satisfaites</div>
+        </div>
+        <div class="story-tile">
+          <div class="story-tile-val">100%</div>
+          <div class="story-tile-label" data-i18n="home.story.stat2">Fait main</div>
+        </div>
+        <div class="story-tile">
+          <div class="story-tile-val">19+</div>
+          <div class="story-tile-label" data-i18n="home.story.stat3">Ans d'artisanat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="section" id="sectionTestimonials">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label" data-i18n="home.testi.label">Témoignages</div>
+        <h2 class="section-title" data-i18n="home.testi.title">Ce qu'elles en disent</h2>
+        <div class="ornament-center" id="ornTestimonials"></div>
+      </div>
+      <div class="testimonials" id="testimonialsGrid">
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <div class="section-inner">
+      <div class="ornament-center" id="ornNewsletter"></div>
+      <h2 data-i18n="newsletter.title">Rejoignez l'atelier</h2>
+      <p data-i18n="newsletter.sub">Recevez en avant-première nos nouvelles collections et offres exclusives</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" placeholder="votre@email.dz" type="email" id="nlEmail" data-i18n-placeholder="newsletter.placeholder"/>
+        <button class="btn-hero-primary" onclick="subscribeNewsletter()" data-i18n="newsletter.cta">S'abonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATALOGUE -->
+<div id="page-catalogue" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-header" style="margin-bottom:32px">
+        <div class="section-label" data-i18n="catalogue.label">Boutique</div>
+        <h2 class="section-title" data-i18n="catalogue.title">Notre collection</h2>
+        <div class="ornament-center" id="ornCatalogue"></div>
+      </div>
+      <div class="catalogue-wrap">
+        <div class="filter-panel">
+          <div class="filter-title" data-i18n="catalogue.filter">Filtrer</div>
+          <div class="filter-group" id="catFilters">
+            <div class="filter-group-title">Catégorie</div>
+            <div style="color:var(--text-muted);font-size:12px">Chargement…</div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group-title">Fourchette de prix</div>
+            <div class="price-range">
+              <input class="price-input" type="number" placeholder="Min" id="priceMin" oninput="applyFilters()"/>
+              <input class="price-input" type="number" placeholder="Max" id="priceMax" oninput="applyFilters()"/>
+            </div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group-title">Trier par</div>
+            <select class="sort-select" id="sortBy" onchange="applyFilters()">
+              <option value="featured">Mis en avant</option>
+              <option value="prix_asc">Prix croissant</option>
+              <option value="prix_desc">Prix décroissant</option>
+              <option value="note">Mieux notés</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group-title">Type de produit</div>
+            <label class="filter-check"><input type="checkbox" id="filterTypeAll" checked onchange="toggleTypeAll(this)"/> Tout</label>
+            <label class="filter-check"><input type="checkbox" id="filterTypeSurMesure" checked onchange="onTypeCheckboxChange()"/> Sur mesure</label>
+            <label class="filter-check"><input type="checkbox" id="filterTypeStock" checked onchange="onTypeCheckboxChange()"/> En stock</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group-title">Disponibilité</div>
+            <!-- filtre stock retiré — produits sur commande -->
+            <label class="filter-check"><input type="checkbox" id="filterSale" onchange="applyFilters()"/> En promotion</label>
+          </div>
+        </div>
+        <div class="catalogue-main">
+          <div class="catalogue-top catalogue-top-results">
+            <span class="results-count" id="resultsCount">8 produits</span>
+          </div>
+          <div class="products-grid" id="catalogue-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div id="page-produit" class="page">
+  <div class="product-detail" id="productDetail"></div>
+  <div class="reviews-section">
+    <div class="reviews-title">Avis clients</div>
+    <div id="reviewsList"></div>
+    <div style="text-align:center;margin-top:12px">
+      <button class="btn-ghost" onclick="openReviewForm()">Laisser un avis</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANIER -->
+<div id="page-panier" class="page">
+  <div class="cart-wrap" id="cartContent"></div>
+</div>
+
+<!-- CHECKOUT -->
+<div id="page-checkout" class="page">
+  <div class="checkout-wrap" id="checkoutContent"></div>
+</div>
+
+<!-- COMPTE -->
+<div id="page-compte" class="page">
+  <div class="account-wrap" id="accountContent"></div>
+</div>
+
+<!-- CONNEXION -->
+<div id="page-connexion" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <img src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Atelier S.L" class="auth-logo-img">
+      <h2 class="auth-title">Atelier S.L</h2>
+      <p class="auth-sub">Espace client</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Se connecter</button>
+        <button class="auth-tab" onclick="switchAuthTab('register')">Créer un compte</button>
+      </div>
+      <div class="auth-form active" id="loginForm">
+        <div class="form-group mb16"><label class="form-label">Email</label><input class="form-input" type="email" id="loginEmail" placeholder="vous@email.dz"/></div>
+        <div class="form-group mb16"><label class="form-label">Mot de passe</label><input class="form-input" type="password" id="loginPw" placeholder="••••••••"/></div>
+        <div id="loginErr" class="auth-error"></div>
+        <button class="btn-auth" onclick="doLogin()">Se connecter →</button>
+        <span class="auth-link" onclick="switchAuthTab('forgot')">Mot de passe oublié ?</span>
+
+        <div class="auth-divider">ou continuer avec</div>
+        <button class="oauth-btn" onclick="loginWithGoogle()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Continuer avec Google
+        </button>
+      </div>
+      <div class="auth-form" id="registerForm">
+        <div class="form-grid mb16">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" id="regPrenom" placeholder="Amina"/></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" id="regNom" placeholder="Boukhalfa"/></div>
+        </div>
+        <div class="form-group mb16"><label class="form-label">Email</label><input class="form-input" type="email" id="regEmail" placeholder="vous@email.dz"/></div>
+        <div class="form-group mb16"><label class="form-label">Téléphone</label><input class="form-input" type="tel" id="regPhone" placeholder="+213 555 123 456"/></div>
+        <div class="form-group mb16"><label class="form-label">Mot de passe</label><input class="form-input" type="password" id="regPw" placeholder="••••••••"/><div style="font-size:11px;color:var(--text-muted);margin-top:5px">Min. 8 caractères, une majuscule et un chiffre</div></div>
+        <div id="regErr" class="auth-error"></div>
+        <button class="btn-auth" onclick="doRegister()">Créer mon compte →</button>
+
+        <div class="auth-divider">ou continuer avec</div>
+        <button class="oauth-btn" onclick="loginWithGoogle()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Continuer avec Google
+        </button>
+      </div>
+      <div class="auth-form" id="forgotForm">
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Entrez votre email pour recevoir un lien de réinitialisation.</p>
+        <div class="form-group mb16"><label class="form-label">Email</label><input class="form-input" type="email" id="forgotEmail" placeholder="vous@email.dz"/></div>
+        <button class="btn-auth" onclick="doForgot()">Envoyer le lien →</button>
+        <span class="auth-link" onclick="switchAuthTab('login')">← Retour à la connexion</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label" data-i18n="contact.label">Nous joindre</div>
+        <h2 class="section-title" data-i18n="contact.title">Contact & Devis</h2>
+        <div class="ornament-center" id="ornContact"></div>
+      </div>
+      <div class="contact-wrap" style="padding:0">
+        <div class="contact-info-block">
+          <div class="contact-info-block .info-bg" id="contactBg"></div>
+          <div class="ornament-center" id="ornContactCard" style="margin-bottom:20px"></div>
+          <h2 style="position:relative;z-index:1" data-i18n="contact.h2">Parlons de votre projet</h2>
+          <p style="position:relative;z-index:1" data-i18n="contact.p">Que ce soit pour une commande sur mesure, un devis pour votre mariage ou simplement pour en savoir plus sur nos créations.</p>
+          <div class="contact-detail"><div class="contact-detail-icon">📍</div><div class="contact-detail-text" data-i18n-html="contact.address"><a href="https://maps.google.com/maps?q=Atelier+S.L%2C+Azazga%2C+Tizi+Ouzou%2C+Alg%C3%A9rie" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Atelier S.L, Azazga<br>Tizi Ouzou, Algérie</a></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-text"><a href="tel:+213XXXXXXXXX" style="color:inherit;text-decoration:none">+213 XXX XX XX XX</a></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div class="contact-detail-text"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@example.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">contact@example.com</a></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">⏰</div><div class="contact-detail-text" data-i18n-html="contact.hours">Dim – Sam : 9h à 18h<br>Réponse sous 24h</div></div>
+          <div class="contact-map">
+            <iframe
+              title="Localisation Atelier S.L — Azazga"
+              src="https://maps.google.com/maps?q=Atelier%20S.L%2C%20Azazga%2C%20Tizi%20Ouzou%2C%20Alg%C3%A9rie&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Azazga%2C+Tizi+Ouzou%2C+Alg%C3%A9rie" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:12px;color:var(--accent);position:relative;z-index:1" data-i18n="contact.mapLink">Ouvrir dans Google Maps →</a>
+        </div>
+        <div>
+          <div class="contact-form-panel" style="background:var(--card);border:1px solid var(--card-bdr);border-radius:16px;padding:28px;box-shadow:var(--sh);margin-bottom:16px">
+            <h3 data-i18n="contact.form.h3">Envoyez-nous un message</h3>
+            <p class="sub" data-i18n="contact.form.sub">Décrivez votre projet ou posez vos questions</p>
+            <div class="form-grid mb16">
+              <div class="form-group"><label class="form-label" data-i18n="contact.form.firstName">Prénom</label><input class="form-input" id="cPrenom" placeholder="Amina"/></div>
+              <div class="form-group"><label class="form-label" data-i18n="contact.form.lastName">Nom</label><input class="form-input" id="cNom" placeholder="Boukhalfa"/></div>
+            </div>
+            <div class="form-group mb16"><label class="form-label" data-i18n="contact.form.email">Email</label><input class="form-input" type="email" id="cEmail" placeholder="vous@email.dz"/></div>
+            <div class="form-group mb16"><label class="form-label" data-i18n="contact.form.phone">Téléphone</label><input class="form-input" id="cPhone" placeholder="+213 …"/></div>
+            <div class="form-group mb16"><label class="form-label" data-i18n="contact.form.subject">Objet</label>
+              <select class="form-input" id="cObjet">
+                <option value="produit" data-i18n="contact.form.opt1">Question sur un produit</option>
+                <option value="commande" data-i18n="contact.form.opt2">Commande sur mesure</option>
+                <option value="commande" data-i18n="contact.form.opt3">Devis mariage</option>
+                <option value="retour_remboursement" data-i18n="contact.form.opt4">Retour / SAV</option>
+                <option value="autre" data-i18n="contact.form.opt5">Autre</option>
+              </select>
+            </div>
+            <div class="form-group mb16"><label class="form-label" data-i18n="contact.form.message">Message</label><textarea class="form-textarea" id="cMsg" placeholder="Décrivez votre demande…" rows="4" data-i18n-placeholder="contact.form.messagePlaceholder"></textarea></div>
+            <button class="btn-submit" onclick="sendContact()" data-i18n="contact.form.submit">Envoyer le message ✈</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- À PROPOS -->
+<div id="page-apropos" class="page">
+  <div class="apropos-hero">
+    <div class="apropos-hero-bg" id="aproposBg"></div>
+    <div style="position:relative;z-index:1">
+      <div class="ornament-center" id="ornApropos" style="margin-bottom:20px"></div>
+      <h1 data-i18n="apropos.h1">Notre histoire</h1>
+      <p data-i18n="apropos.lead">Une passion pour l'art kabyle transmise de génération en génération, sublimée par l'excellence artisanale. Chaque création raconte un peu de notre histoire familiale, tissée de patience, d'amour et de fierté. C'est cette flamme, transmise avec le cœur, que nous avons à cœur de faire vivre à travers chacune de nos pièces.</p>
+    </div>
+  </div>
+  <div class="apropos-photo-band">
+    <div class="apropos-photo-frame">
+      <img id="aproposHistoireImage" src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Atelier S.L" onerror="this.classList.remove('has-product');this.src='https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png'">
+      <div class="apropos-photo-caption">
+        <span class="tag">✦ Notre dernière création ✦</span>
+        <span class="name" id="aproposHistoireNom">Atelier S.L</span>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div style="max-width:680px;margin:0 auto;text-align:center">
+        <div class="section-label" data-i18n="apropos.mission.label">Notre mission</div>
+        <h2 class="section-title" data-i18n="apropos.mission.title">Préserver, créer, transmettre</h2>
+        <div class="ornament-center" id="ornMission"></div>
+        <p style="font-size:16px;color:var(--text-sub);line-height:1.9;margin-top:20px" data-i18n="apropos.mission.text">Atelier S.L est né d'une conviction profonde : l'art et la tradition kabyle méritent une place de choix dans la mode d'aujourd'hui. Nos créations ne cherchent pas à remplacer la tradition, mais à la faire vivre autrement, en l'intégrant avec tendresse dans le monde de la mode moderne. Nous gardons précieusement la touche kabyle au cœur de chaque pièce, tout en vous proposant des créations soirée pensées pour plaire à tous les goûts et accompagner vos plus beaux moments.</p>
+      </div>
+      <div class="values-grid mt16" style="margin-top:48px;grid-template-columns:repeat(2,1fr)">
+        <div class="value-card"><div class="value-icon">👗</div><div class="value-title" data-i18n="apropos.products.title">Nos produits</div><div class="value-text" data-i18n="apropos.products.text">Nous vous proposons des robes kabyles, des tenues traditionnelles algériennes et des robes de soirée pensées pour vos invités et vos mariées, ou tout simplement pour vous faire plaisir chez vous. Nous vous proposons également une sélection d'accessoires pour sublimer vos tenues.</div></div>
+        <div class="value-card"><div class="value-icon">🪡</div><div class="value-title" data-i18n="apropos.services.title">Nos services</div><div class="value-text" data-i18n="apropos.services.text">Notre site vous propose deux façons de nous découvrir. Des robes et tenues prêt-à-porter, pensées pour s'adapter à toutes les tailles et à toutes les envies, ainsi qu'un service de confection sur mesure, pour vous démarquer et laisser votre touche personnelle sur votre tenue.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:var(--bg2)">
+    <div class="section-inner">
+      <div class="section-header"><div class="section-label" data-i18n="apropos.team.label">L'équipe</div><h2 class="section-title" data-i18n="apropos.team.title">Une famille au service de votre élégance</h2></div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-img">👩‍🎨</div><div class="team-body"><div class="team-name">Ourdia Bounkar</div><div class="team-role" data-i18n="apropos.team.m1.role">Fondatrice & Modéliste</div><p style="font-size:13px;color:var(--text-sub);margin-top:8px" data-i18n="apropos.team.m1.desc">Plus de 19 ans de passion et de dévouement pour son métier</p></div></div>
+        <div class="team-card"><div class="team-img">🤝</div><div class="team-body"><div class="team-name">Syphax Tamairt</div><div class="team-role" data-i18n="apropos.team.m2.role">Co-fondateur</div><p style="font-size:13px;color:var(--text-sub);margin-top:8px" data-i18n="apropos.team.m2.desc">Un soutien fidèle et une vision partagée pour faire grandir Atelier S.L</p></div></div>
+        <div class="team-card"><div class="team-img">💻</div><div class="team-body"><div class="team-name">Liza Tamairt & Sana Tamairt</div><div class="team-role" data-i18n="apropos.team.m3.role">Chargées de communication et du site</div><p style="font-size:13px;color:var(--text-sub);margin-top:8px" data-i18n="apropos.team.m3.desc">Pour vous accompagner à chaque étape</p></div></div>
+      </div>
+      <div class="mt16" style="margin-top:48px;max-width:600px;margin-left:auto;margin-right:auto">
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:6px;text-align:center" data-i18n="apropos.timeline.title">Notre parcours</h3>
+        <p style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:28px" data-i18n="apropos.timeline.sub">Une belle histoire, une étape à la fois</p>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2007</div><div class="tl-text" data-i18n="apropos.tl.2007">Tout commence à Azazga, où notre fondatrice fait ses premiers pas comme simple ouvrière, animée déjà par une grande passion pour la couture.</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2011</div><div class="tl-text" data-i18n="apropos.tl.2011">Portée par son rêve, elle ouvre son tout premier atelier, Ourdia Couture, à Azeffoun.</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2021</div><div class="tl-text" data-i18n="apropos.tl.2021">L'atelier Ourdia Couture s'installe à Azazga, prêt à écrire un nouveau chapitre.</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2026</div><div class="tl-text" data-i18n="apropos.tl.2026">La famille s'agrandit, les rêves grandissent avec elle : c'est ainsi que naît Atelier S.L, fruit de toute une vie de passion et de dévouement.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main><!-- end page-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo-plate" style="padding:10px 16px;border-radius:14px;margin-bottom:14px"><img src="https://res.cloudinary.com/votre-cloud-name/image/upload/v1788201002/logo.png" alt="Atelier S.L" class="footer-logo-img"></div>
+      <div class="footer-brand">
+        <h3>Atelier S.L</h3>
+        <p data-i18n="footer.brandDesc">Style kabyle, Luxe et tradition.</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/atelier._sl?igsi=dGt3a295cWk4bG92" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2c-2.7 0-3.05.01-4.12.06-1.06.05-1.79.22-2.43.47-.66.26-1.22.6-1.77 1.16-.56.55-.9 1.11-1.16 1.77-.25.64-.42 1.37-.47 2.43C2.01 8.95 2 9.3 2 12s.01 3.05.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.16 1.77.55.56 1.11.9 1.77 1.16.64.25 1.37.42 2.43.47C8.95 21.99 9.3 22 12 22s3.05-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47.66-.26 1.22-.6 1.77-1.16.56-.55.9-1.11 1.16-1.77.25-.64.42-1.37.47-2.43.05-1.07.06-1.42.06-4.12s-.01-3.05-.06-4.12c-.05-1.06-.22-1.79-.47-2.43-.26-.66-.6-1.22-1.16-1.77-.55-.56-1.11-.9-1.77-1.16-.64-.25-1.37-.42-2.43-.47C15.05 2.01 14.7 2 12 2zm0 1.8c2.65 0 2.97.01 4.02.06.97.04 1.5.2 1.85.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.35.3.88.34 1.85.05 1.05.06 1.37.06 4.02s-.01 2.97-.06 4.02c-.04.97-.2 1.5-.34 1.85-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.14-.88.3-1.85.34-1.05.05-1.37.06-4.02.06s-2.97-.01-4.02-.06c-.97-.04-1.5-.2-1.85-.34-.47-.18-.8-.4-1.15-.75-.35-.35-.57-.68-.75-1.15-.14-.35-.3-.88-.34-1.85C3.81 14.97 3.8 14.65 3.8 12s.01-2.97.06-4.02c.04-.97.2-1.5.34-1.85.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.14.88-.3 1.85-.34C9.03 3.81 9.35 3.8 12 3.8zm0 3.05a5.15 5.15 0 100 10.3 5.15 5.15 0 000-10.3zm0 8.5a3.35 3.35 0 110-6.7 3.35 3.35 0 010 6.7zm5.35-8.7a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/19XS7fEHqz/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@atelier_sl" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.7a3.1 3.1 0 11-2.19-2.96V9.4a6.3 6.3 0 105.39 6.24V8.63a8.16 8.16 0 004.7 1.5V6.9a4.85 4.85 0 01-4.7-4.9z"/></svg>
+        </a>
+      </div>
+    </div>
+   
+    <div class="footer-col">
+      <h4 data-i18n="footer.info.title">Informations</h4>
+      <a href="/a-propos" onclick="event.preventDefault();go('apropos')" data-i18n="footer.info.about">À propos</a>
+      <a href="/contact" onclick="event.preventDefault();go('contact')" data-i18n="footer.info.contact">Contact</a>
+      <a onclick="openInfoModal('livraison')" data-i18n="footer.info.shipping">Livraison & retours</a>
+      <a onclick="openInfoModal('taille')" data-i18n="footer.info.sizeGuide">Guide des tailles</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.contact.title">Contact</h4>
+      <div class="footer-contact-item">
+        <span class="fci-icon">📞</span>
+        <a class="fci-text" href="tel:+213XXXXXXXXX">+213 XXX XX XX XX</a>
+      </div>
+      <div class="footer-contact-item">
+        <span class="fci-icon">📍</span>
+        <a class="fci-text" href="https://maps.google.com/maps?q=Atelier+S.L%2C+Azazga%2C+Tizi+Ouzou%2C+Alg%C3%A9rie" target="_blank" rel="noopener" data-i18n-html="contact.address" style="text-decoration:none">Atelier S.L, Azazga<br>Tizi Ouzou, Algérie</a>
+      </div>
+      <div class="footer-contact-item">
+        <span class="fci-icon">✉️</span>
+        <a class="fci-text" href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@example.com" target="_blank" rel="noopener">contact@example.com</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.account.title">Mon compte</h4>
+      <a onclick="goAccount()" data-i18n="footer.account.space">Mon espace</a>
+      <a href="/panier" onclick="event.preventDefault();go('panier')" data-i18n="footer.account.cart">Mon panier</a>
+      <a href="/connexion" onclick="event.preventDefault();go('connexion')" data-i18n="footer.account.login">Connexion</a>
+      <a data-i18n="footer.account.tracking">Suivi de commande</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy" data-i18n="footer.copyright">© 2026 Atelier S.L — Tous droits réservés</span>
+    <span class="footer-copy footer-dev" data-i18n-html="footer.dev">Site conçu et développé par <a target="_blank" rel="noopener">TAMAIRT Liza</a> — Juillet 2026</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     MODALES — Guide des tailles / Livraison & retours
+══════════════════════════════════════════════════════════ -->
+<div class="info-modal-overlay" id="infoModalOverlay" onclick="if(event.target===this)closeInfoModal()">
+  <div class="info-modal" id="infoModalBox"></div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ═══════════════ MODAL : RÉINITIALISATION MOT DE PASSE ═══════════════ -->
+<div class="reset-modal-overlay" id="resetModalOverlay" role="dialog" aria-modal="true" aria-labelledby="resetModalTitle">
+  <div class="reset-modal">
+    <button class="reset-modal-close" onclick="closeResetModal()" aria-label="Fermer">&#10005;</button>
+    <div class="reset-modal-ornament" id="resetModalOrnament"></div>
+    <h2 id="resetModalTitle">Nouveau mot de passe</h2>
+    <p class="sub">Choisissez un mot de passe sécurisé pour votre compte&nbsp;Atelier&nbsp;S.L.</p>
+
+    <div id="resetSuccess">
+      ✓ Mot de passe mis à jour avec succès !<br>
+      <span style="font-size:12px;opacity:.8">Vous pouvez maintenant vous connecter.</span>
+    </div>
+
+    <div id="resetFormBody">
+      <div class="form-group mb16">
+        <label class="form-label">Nouveau mot de passe</label>
+        <input class="form-input" type="password" id="resetPw1"
+               placeholder="••••••••"
+               oninput="resetPwStrength(this.value)"
+               onkeydown="if(event.key==='Enter')doResetPassword()"/>
+        <div class="reset-pw-strength" title="Force du mot de passe">
+          <div class="reset-pw-strength-bar" id="resetPwBar"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:5px">
+          Min. 8 caractères, une majuscule et un chiffre
+        </div>
+      </div>
+      <div class="form-group mb16">
+        <label class="form-label">Confirmer le mot de passe</label>
+        <input class="form-input" type="password" id="resetPw2"
+               placeholder="••••••••"
+               onkeydown="if(event.key==='Enter')doResetPassword()"/>
+      </div>
+      <div id="resetErr"></div>
+      <button class="btn-auth" id="resetSubmitBtn" onclick="doResetPassword()">
+        Enregistrer le nouveau mot de passe →
+      </button>
+    </div>
+
+    <div style="text-align:center;margin-top:14px">
+      <span class="auth-link" onclick="closeResetModal();go('connexion')">
+        ← Retour à la connexion
+      </span>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+node_modules/
+
+# Secrets et configuration locale (ne jamais versionner)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+npm-debug.log*
+.DS_Store
+
+# Journaux, sauvegardes et fichiers de déploiement
+*.log
+*.sql.bak
+*.dump
+tmp/
+.metadata.json
+uploads/

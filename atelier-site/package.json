@@ -1,0 +1,21 @@
+{
+  "name": "atelier-sl-ssr-server",
+  "version": "1.0.0",
+  "description": "Serveur de pré-rendu (SSR-lite) pour le SPA Atelier S.L — sert le HTML avec le contenu produit/catégorie et les balises SEO déjà présents, pour l'indexation et le partage.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^2.7.0"
+  },
+  "overrides": {
+    "proxy-addr": "^2.0.8",
+    "qs": "^6.16.0"
+  }
+}
